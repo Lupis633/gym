@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Acceso y Gestión de Inventarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #dfb8ee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container, .inventario-container {
+            background-color: rgb(182, 176, 238);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none; /* Ocultar por defecto */
+        }
+        .inventario-container {
+            background-color: rgb(232, 217, 235);
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        input[type="text"], input[type="password"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid rgb(233, 199, 236);
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #ae2eb3;
+            color: rgb(181, 168, 212);
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #d7c1eb;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #bca8eb;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container" id="loginFormContainer">
+    <h2>Acceso</h2>
+    <form id="loginForm">
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" name="usuario" required>
+        
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required>
+        
+        <input type="submit" value="Iniciar Sesión">
+    </form>
+</div>
+
+<div class="inventario-container" id="inventarioContainer">
+    <h1>Gestión de Inventarios</h1>
+    
+    <form id="inventarioForm">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="apellido" placeholder="Apellido" required>
+        <input type="text" id="direccion" placeholder="Dirección" required>
+        <input type="text" id="telefono" placeholder="Número de Teléfono" required>
+        <input type="text" id="codigoPostal" placeholder="Código Postal" required>
+        <input type="text" id="municipio" placeholder="Municipio" required>
+        <input type="submit" value="Agregar Artículo">
+    </form>
+
+    <table id="tablaInventario">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Dirección</th>
+                <th>Número de Teléfono</th>
+                <th>C.P.</th>
+                <th>Municipio</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById('loginFormContainer').style.display = 'block';
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const usuario = document.getElementById('usuario').value;
+        const contrasena = document.getElementById('contrasena').value;
+
+        if (usuario === 'lupita' && contrasena === '2007') {
+            document.getElementById('loginFormContainer').style.display = 'none';
+            document.getElementById('inventarioContainer').style.display = 'block';
+        } else {
+            alert('Usuario o contraseña incorrectos');
+        }
+    });
+
+    document.getElementById('inventarioForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
+        const direccion = document.getElementById('direccion').value;
+        const telefono = document.getElementById('telefono').value;
+        const codigoPostal = document.getElementById('codigoPostal').value;
+        const municipio = document.getElementById('municipio').value;
+
+        const tabla = document.getElementById('tablaInventario').getElementsByTagName('tbody')[0];
+        const nuevaFila = tabla.insertRow();
+
+        nuevaFila.innerHTML = `
+            <td>${nombre}</td>
+            <td>${apellido}</td>
+            <td>${direccion}</td>
+            <td>${telefono}</td>
+            <td>${codigoPostal}</td>
+            <td>${municipio}</td>
+        `;
+
+        this.reset(); 
+    });
+</script>
+
+</body>
+</html>
